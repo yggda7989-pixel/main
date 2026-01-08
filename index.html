@@ -6,76 +6,39 @@
   <title>YGGDA</title>
 
   <style>
-:root {
-  --bg: #d7e0d8;
-      --maxw: 520px;
+    :root{
+      --bg: #DBE5DC;     /* 로고 이미지 배경과 통일 */
+      --img: 20vw;       /* 이미지 크기 = 화면의 20% */
+      --img-max: 260px;  /* 너무 커지지 않게 상한 */
+      --img-min: 140px;  /* 너무 작아지지 않게 하한 */
     }
 
     * { box-sizing: border-box; }
 
-    body {
+    body{
       margin: 0;
       min-height: 100vh;
       display: grid;
       place-items: center;
       background: var(--bg);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
 
-    .wrap {
-      width: min(var(--maxw), 90vw);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+    .wrap{
+      display: grid;
+      place-items: center;
     }
 
-    a.logo {
-      display: inline-block;
-      width: 100%;
-      border-radius: 18px;
-      padding: 10px;
-      outline: none;
-      transform: translateY(6px);
-      opacity: 0;
-      animation: fadeUp 700ms ease forwards;
-      transition: transform 200ms ease, filter 200ms ease;
-    }
-
-    a.logo:hover {
-      transform: translateY(0);
-      filter: drop-shadow(0 12px 18px rgba(0,0,0,0.12));
-    }
-
-    a.logo:focus-visible {
-      box-shadow: 0 0 0 3px rgba(0,120,255,0.35);
-    }
-
-    img {
-      width: 100%;
+    img{
+      width: clamp(var(--img-min), var(--img), var(--img-max));
       height: auto;
       display: block;
-      user-select: none;
-      -webkit-user-drag: none;
-    }
-
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
   </style>
 </head>
 
 <body>
   <main class="wrap">
-    <!-- 이미지 파일명을 logo.png 로 같은 폴더에 저장 -->
-    <a class="logo" href="https://www.yggda.com" target="_blank" rel="noopener noreferrer" aria-label="YGGDA 사이트로 이동">
-      <img src="logo.png" alt="YGGDA 로고" />
-    </a>
+    <img src="logo.png" alt="YGGDA 로고">
   </main>
 </body>
 </html>
-
-
