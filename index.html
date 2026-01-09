@@ -10,6 +10,78 @@
       --bg: #DBE5DC;           /* 로고 이미지 배경과 통일 */
       --text: #1f3b2e;         /* 딥 그린(로고 톤 계열) */
       --muted: rgba(31,59,46,.78);
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YGGDA</title>
+
+  <style>
+    :root{
+      --bg: #DBE5DC;            /* 로고 배경과 통일 */
+      --text: #1f3b2e;          /* 로고 톤 기반 */
+      --muted: rgba(31,59,46,.80);
+
+      --img: 20vw;              /* 이미지 = 화면 20% */
+      --img-max: 260px;
+      --img-min: 140px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body{
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Apple SD Gothic Neo",
+                   "Noto Sans KR", Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    .wrap{
+      display: grid;
+      place-items: center;
+      text-align: center;
+      gap: 22px;               /* 로고-문구 간격 */
+      padding: 28px;
+    }
+
+    img{
+      width: clamp(var(--img-min), var(--img), var(--img-max));
+      height: auto;
+      display: block;
+    }
+
+    /* 한줄 기업형 카피 */
+    .tagline{
+      font-size: clamp(14px, 1.4vw, 18px);
+      font-weight: 500;
+      letter-spacing: -0.01em;  /* 자간 살짝 줄임 */
+      line-height: 1.9;         /* 여백감 */
+      color: var(--muted);
+      margin: 0;
+      white-space: nowrap;      /* 한 줄 고정 */
+    }
+
+    /* 모바일에서 너무 길면 자동 줄바꿈 허용 */
+    @media (max-width: 380px){
+      .tagline{
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <img src="logo.png" alt="YGGDA 로고">
+    <p class="tagline">성장을 여는 길, 도약을 향한 목적지</p>
+  </main>
+</body>
+</html>
 
       --img: 20vw;
       --img-max: 260px;
@@ -87,3 +159,4 @@
   </main>
 </body>
 </html>
+
