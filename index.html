@@ -7,10 +7,13 @@
 
   <style>
     :root{
-      --bg: #DBE5DC;     /* 로고 이미지 배경과 통일 */
-      --img: 20vw;       /* 이미지 크기 = 화면의 20% */
-      --img-max: 260px;  /* 너무 커지지 않게 상한 */
-      --img-min: 140px;  /* 너무 작아지지 않게 하한 */
+      --bg: #DBE5DC;           /* 로고 이미지 배경과 통일 */
+      --text: #1f3b2e;         /* 딥 그린(로고 톤 계열) */
+      --muted: rgba(31,59,46,.78);
+
+      --img: 20vw;
+      --img-max: 260px;
+      --img-min: 140px;
     }
 
     * { box-sizing: border-box; }
@@ -21,11 +24,17 @@
       display: grid;
       place-items: center;
       background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Apple SD Gothic Neo",
+                   "Noto Sans KR", Segoe UI, Roboto, Arial, sans-serif;
     }
 
     .wrap{
       display: grid;
       place-items: center;
+      text-align: center;
+      gap: 18px; /* 로고와 텍스트 간격 */
+      padding: 24px;
     }
 
     img{
@@ -33,12 +42,48 @@
       height: auto;
       display: block;
     }
+
+    /* 타이포그래피 */
+    .copy{
+      display: grid;
+      gap: 8px;
+    }
+
+    .copy .line1{
+      font-size: clamp(18px, 2.0vw, 26px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .copy .line2{
+      font-size: clamp(14px, 1.4vw, 18px);
+      font-weight: 500;
+      letter-spacing: 0.12em;   /* 목적지 문구를 타이포 느낌으로 */
+      text-transform: uppercase; /* 원치 않으면 제거 */
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    /* 너무 딱딱하면 아래 줄을 주석 해제해서 시각적 포인트 */
+    .divider{
+      width: 64px;
+      height: 1px;
+      background: rgba(31,59,46,.28);
+      margin: 4px auto 0;
+    }
   </style>
 </head>
 
 <body>
   <main class="wrap">
     <img src="logo.png" alt="YGGDA 로고">
+
+    <div class="copy" aria-label="YGGDA 카피">
+      <div class="line1">성장을 여는 길</div>
+      <div class="divider"></div>
+      <div class="line2">도약을 향한 목적지</div>
+    </div>
   </main>
 </body>
 </html>
