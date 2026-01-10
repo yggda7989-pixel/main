@@ -5,79 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>YGGDA | Note</title>
 
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin />
-
-/* ✅ 전송 완료 화면 */
-.done{
-  display: none;
-  margin-top: 22px;
-  text-align: center;
-  padding: 26px 18px;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.55);
-  border: 1px solid rgba(255,255,255,0.7);
-}
-
-.done-icon{
-  width: 56px;
-  height: 56px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  margin: 0 auto 10px;
-  background: rgba(31,59,46,0.12);
-  color: #1f3b2e;
-  font-size: 28px;
-  font-weight: 900;
-}
-
-.done-title{
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin-bottom: 6px;
-}
-
-.done-desc{
-  font-size: 14px;
-  color: rgba(31,59,46,0.7);
-  line-height: 1.6;
-}
-
-.done-actions{
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 16px;
-  flex-wrap: wrap;
-}
-
-.done-btn{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 16px;
-  border-radius: 14px;
-  font-weight: 700;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  background: #1f3b2e;
-  color: #fff;
-  min-width: 140px;
-}
-
-.done-btn.ghost{
-  background: rgba(31,59,46,0.10);
-  color: #1f3b2e;
-}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin />
 
   <style>
     :root {
       --bg: #DBE5DC;
       --text: #1f3b2e;
       --text-muted: rgba(31, 59, 46, 0.6);
-      --card-bg: rgba(255, 255, 255, 0.5); /* 반투명 화이트 */
+      --card-bg: rgba(255, 255, 255, 0.5);
       --card-border: rgba(255, 255, 255, 0.6);
       --input-bg: rgba(255, 255, 255, 0.6);
       --focus-ring: rgba(31, 59, 46, 0.2);
@@ -99,24 +34,19 @@
 
     .card {
       width: 100%;
-      max-width: 640px; /* 읽기 편한 적절한 너비 제한 */
-      
-      /* Glassmorphism 효과 */
+      max-width: 640px;
       background: var(--card-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      
       border: 1px solid var(--card-border);
       border-radius: 24px;
       padding: 40px 32px;
       box-shadow: 0 8px 32px rgba(31, 59, 46, 0.05);
-
-      /* 등장 애니메이션 */
       opacity: 0;
       transform: translateY(10px);
       animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-    
+
     @media (max-width: 480px) {
       .card { padding: 30px 20px; }
     }
@@ -162,28 +92,24 @@
       font-size: 13px;
       font-weight: 600;
       color: var(--text);
-      margin: 0 0 8px 4px; /* 인풋과 정렬 맞춤 */
+      margin: 0 0 8px 4px;
     }
 
-    .field-group {
-      margin-bottom: 24px;
-    }
+    .field-group { margin-bottom: 24px; }
 
     input, textarea {
       width: 100%;
       padding: 16px;
       border-radius: 16px;
-      border: 1px solid transparent; /* 기본 테두리 제거 */
+      border: 1px solid transparent;
       background: var(--input-bg);
-      
       font-family: inherit;
       font-size: 15px;
       color: var(--text);
       outline: none;
       line-height: 1.5;
-      
       transition: all 0.2s ease;
-      box-shadow: 0 2px 8px rgba(31, 59, 46, 0.03); /* 아주 약한 그림자 */
+      box-shadow: 0 2px 8px rgba(31, 59, 46, 0.03);
     }
 
     input:focus, textarea:focus {
@@ -196,25 +122,19 @@
       color: rgba(31, 59, 46, 0.35);
     }
 
-    textarea {
-      min-height: 200px;
-      resize: none; /* 디자인 유지 위해 리사이즈 끔 (필요시 vertical로 변경) */
-    }
+    textarea { min-height: 200px; resize: none; }
 
     button[type="submit"] {
       width: 100%;
       padding: 16px;
       margin-top: 10px;
-      
       border-radius: 16px;
       border: none;
-      
-      background: var(--text); /* 메인과 동일한 Solid 컬러 */
+      background: var(--text);
       color: #fff;
       font-size: 16px;
       font-weight: 700;
       cursor: pointer;
-      
       transition: all 0.3s;
       box-shadow: 0 4px 12px rgba(31, 59, 46, 0.15);
     }
@@ -224,9 +144,14 @@
       transform: translateY(-2px);
       box-shadow: 0 6px 16px rgba(31, 59, 46, 0.25);
     }
-    
-    button[type="submit"]:active {
-      transform: scale(0.98);
+
+    button[type="submit"]:active { transform: scale(0.98); }
+
+    button[disabled]{
+      opacity: .75;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
     }
 
     .status {
@@ -249,14 +174,77 @@
       line-height: 1.5;
     }
 
+    /* ✅ 전송 완료 화면 */
+    .done{
+      display: none;
+      margin-top: 22px;
+      text-align: center;
+      padding: 26px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(255,255,255,0.7);
+    }
+
+    .done-icon{
+      width: 56px;
+      height: 56px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 10px;
+      background: rgba(31,59,46,0.12);
+      color: #1f3b2e;
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    .done-title{
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .done-desc{
+      font-size: 14px;
+      color: rgba(31,59,46,0.7);
+      line-height: 1.6;
+    }
+
+    .done-actions{
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .done-btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      background: #1f3b2e;
+      color: #fff;
+      min-width: 140px;
+    }
+
+    .done-btn.ghost{
+      background: rgba(31,59,46,0.10);
+      color: #1f3b2e;
+    }
+
     @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 
+  <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ELTNGHJWH3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -298,28 +286,29 @@
         제출 후에는 내용은 수정하거나 다시 볼 수 없습니다.<br>오직 STELLA만이 확인할 수 있습니다.
       </div>
     </form>
+
     <!-- ✅ 전송 완료 화면 -->
-<div class="done" id="done">
-  <div class="done-icon">✓</div>
-  <div class="done-title">메시지 전송 완료</div>
-  <div class="done-desc">소중한 메시지를 전달했습니다. 감사합니다.</div>
+    <div class="done" id="done">
+      <div class="done-icon">✓</div>
+      <div class="done-title">메시지 전송 완료</div>
+      <div class="done-desc">소중한 메시지를 전달했습니다. 감사합니다.</div>
 
-  <div class="done-actions">
-    <a class="done-btn" href="index.html">메인으로</a>
-    <button class="done-btn ghost" type="button" id="sendMore">추가 메시지 보내기</button>
-  </div>
-</div>
-
+      <div class="done-actions">
+        <a class="done-btn" href="index.html">메인으로</a>
+        <button class="done-btn ghost" type="button" id="sendMore">추가 메시지 보내기</button>
+      </div>
+    </div>
   </main>
 
   <script>
-    // 기존 스크립트 로직은 그대로 유지하되, UI와 연결만 확인합니다.
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzQDQbS1I6o3s-NYljeoDokRAcRZJJS3YzISRiqKHkS4t3H-YuzOFmQHWZuX6BaKB7F/exec";
 
     const form = document.getElementById("noteForm");
     const statusEl = document.getElementById("status");
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const doneEl = document.getElementById("done");
+    const sendMoreBtn = document.getElementById("sendMore");
 
-    // 간단한 연속 제출 방지(20초)
     const cooldownMs = 20000;
 
     form.addEventListener("submit", async (e) => {
@@ -335,6 +324,8 @@
 
       statusEl.style.display = "block";
       statusEl.textContent = "메시지를 안전하게 전달 중입니다...";
+      submitBtn.disabled = true;
+      submitBtn.textContent = "전송 중...";
 
       const payload = {
         visitorName: form.visitorName.value.trim(),
@@ -346,51 +337,57 @@
       };
 
       try {
- const params = new URLSearchParams();
-params.append("visitorName", payload.visitorName);
-params.append("contact", payload.contact);
-params.append("message", payload.message);
-params.append("page", payload.page);
-params.append("userAgent", payload.userAgent);
-params.append("createdAt", payload.createdAt);
+        // ✅ 폼 전송 방식
+        const params = new URLSearchParams();
+        params.append("visitorName", payload.visitorName);
+        params.append("contact", payload.contact);
+        params.append("message", payload.message);
+        params.append("page", payload.page);
+        params.append("userAgent", payload.userAgent);
+        params.append("createdAt", payload.createdAt);
 
-const res = await fetch(WEB_APP_URL, {
-  method: "POST",
-  body: params
-});
+        const res = await fetch(WEB_APP_URL, {
+          method: "POST",
+          body: params
+        });
 
-// Apps Script가 JSON을 안 주는 경우도 있어서 text로 받고 파싱
-function doPost(e) {
-  try {
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
-    var sheet = ss.getSheetByName("responses") || ss.getSheets()[0];
+        const text = await res.text();
+        let data = {};
+        try { data = JSON.parse(text); } catch(e) {}
 
-    var visitorName = (e.parameter.visitorName || "").trim();
-    var contact     = (e.parameter.contact || "").trim();
-    var message     = (e.parameter.message || "").trim();
-    var page        = e.parameter.page || "";
-    var userAgent   = e.parameter.userAgent || "";
-    var createdAt   = e.parameter.createdAt || "";
+        if (data.ok) {
+          localStorage.setItem("yggda_last_submit", String(now));
 
-    if (sheet.getLastRow() === 0) {
-      sheet.appendRow(["timestamp", "visitorName", "contact", "message", "page", "userAgent", "createdAt"]);
-    }
+          // GA4 이벤트(성공만)
+          gtag("event", "note_submit", { page_title: document.title });
 
-    sheet.appendRow([new Date(), visitorName, contact, message, page, userAgent, createdAt]);
+          // 폼 초기화 후 완료 화면 표시
+          form.reset();
+          form.style.display = "none";
+          doneEl.style.display = "block";
 
-    return ContentService
-      .createTextOutput(JSON.stringify({ ok: true }))
-      .setMimeType(ContentService.MimeType.JSON);
+        } else {
+          statusEl.style.display = "block";
+          statusEl.textContent = "제출 실패: 서버 응답 오류";
+          submitBtn.disabled = false;
+          submitBtn.textContent = "메시지 보내기";
+        }
 
-  } catch (err) {
-    return ContentService
-      .createTextOutput(JSON.stringify({ ok: false, error: String(err) }))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-}
+      } catch (err) {
+        statusEl.style.display = "block";
+        statusEl.textContent = "네트워크 오류가 발생했습니다.";
+        submitBtn.disabled = false;
+        submitBtn.textContent = "메시지 보내기";
+      }
+    });
 
+    sendMoreBtn.addEventListener("click", () => {
+      doneEl.style.display = "none";
+      form.style.display = "block";
+      submitBtn.disabled = false;
+      submitBtn.textContent = "메시지 보내기";
+      statusEl.style.display = "none";
+    });
+  </script>
 </body>
-
 </html>
-
-
