@@ -5,16 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>YGGDA</title>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin />
 
   <style>
     :root {
-      --bg: #DBE5DC; /* 요청하신 배경 유지 */
-      --text: #1f3b2e; /* 딥 포레스트 그린 */
+      --bg: #DBE5DC;
+      --text: #1f3b2e;
       --text-muted: rgba(31, 59, 46, 0.65);
-      --white-glass: rgba(255, 255, 255, 0.4);
-      
-      /* 이미지 사이즈 변수 */
       --img-width: 20vw;
       --img-max: 260px;
       --img-min: 140px;
@@ -25,13 +22,13 @@
     body {
       margin: 0;
       min-height: 100vh;
-      display: flex; /* Grid 대신 Flex가 중앙 정렬에 더 유연함 */
+      display: flex;
       align-items: center;
       justify-content: center;
       background: var(--bg);
       color: var(--text);
       font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-      -webkit-font-smoothing: antialiased; /* 폰트 렌더링 부드럽게 */
+      -webkit-font-smoothing: antialiased;
     }
 
     .wrap {
@@ -39,10 +36,8 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      gap: 24px; /* 간격 조정 */
+      gap: 24px;
       padding: 40px 24px;
-      
-      /* 등장 애니메이션 */
       opacity: 0;
       transform: translateY(20px);
       animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -65,7 +60,6 @@
       white-space: nowrap;
     }
 
-    /* 반응형 줄바꿈 처리 */
     @media (max-width: 380px) {
       .tagline { white-space: normal; word-break: keep-all; }
     }
@@ -75,25 +69,21 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      
-      /* 버튼 디자인 고도화 */
       background-color: var(--text);
       color: #fff;
       font-size: 15px;
       font-weight: 600;
       text-decoration: none;
-      
       padding: 14px 32px;
-      border-radius: 100px; /* 둥근 캡슐 형태 */
+      border-radius: 100px;
       box-shadow: 0 4px 12px rgba(31, 59, 46, 0.15);
-      
       transition: all 0.3s ease;
     }
 
     .enter:hover {
       transform: translateY(-2px);
       box-shadow: 0 6px 16px rgba(31, 59, 46, 0.25);
-      background-color: #152b21; /* 호버 시 약간 더 어둡게 */
+      background-color: #152b21;
     }
 
     .enter:active {
@@ -101,28 +91,18 @@
     }
 
     @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 
+  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ELTNGHJWH3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-ELTNGHJWH3'); /* 기존 ID 유지 혹은 수정 필요 */
+    gtag('config', 'G-ELTNGHJWH3');
   </script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ELTNGHJWH3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-ELTNGHJWH3');
-</script>
-
 </head>
 
 <body>
@@ -130,14 +110,11 @@
     <img src="logo.png" alt="YGGDA 로고">
     <p class="tagline">성장을 여는 길, 도약을 향한 목적지</p>
 
-<a class="enter" href="note.html"
-   onclick="gtag('event','enter_click',{page_title:document.title});">
-  접속하기
-</a>
-
+    <!-- ✅ 클릭 이벤트(enter_click) -->
+    <a class="enter" href="note.html"
+       onclick="gtag('event','enter_click',{page_title:document.title});">
+      접속하기
+    </a>
   </main>
 </body>
-
 </html>
-
-
