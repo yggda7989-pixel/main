@@ -369,6 +369,10 @@ statusEl.textContent = "서버 응답: " + text;
           form.style.display = "none";
           doneEl.style.display = "block";
 
+          statusEl.style.display = "block";
+statusEl.textContent = data.mailOk ? "전송 완료 + 메일 알림 발송 완료" : ("전송 완료(메일 실패): " + data.mailErr);
+
+
         } else {
           statusEl.style.display = "block";
           statusEl.textContent = "제출 실패: 서버 응답 오류";
@@ -394,5 +398,6 @@ statusEl.textContent = "서버 응답: " + text;
   </script>
 </body>
 </html>
+
 
 
