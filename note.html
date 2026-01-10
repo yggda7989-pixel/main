@@ -352,6 +352,9 @@
         });
 
         const text = await res.text();
+        statusEl.style.display = "block";
+statusEl.textContent = "서버 응답: " + text;
+
         let data = {};
         try { data = JSON.parse(text); } catch(e) {}
 
@@ -391,4 +394,5 @@
   </script>
 </body>
 </html>
+
 
