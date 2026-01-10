@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YGGDA | Note</title>
+
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+  <style>
+    :root {
+      --bg: #DBE5DC;
+      --text: #1f3b2e;
+      --text-muted: rgba(31, 59, 46, 0.6);
+      --card-bg: rgba(255, 255, 255, 0.5); /* 반투명 화이트 */
+      --card-border: rgba(255, 255, 255, 0.6);
+      --input-bg: rgba(255, 255, 255, 0.6);
+      --focus-ring: rgba(31, 59, 46, 0.2);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Pretendard Variable", Pretendard, -apple-system, sans-serif;
+      padding: 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 640px; /* 읽기 편한 적절한 너비 제한 */
+      
+      /* Glassmorphism 효과 */
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 40px 32px;
+      box-shadow: 0 8px 32px rgba(31, 59, 46, 0.05);
+
+      /* 등장 애니메이션 */
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    @media (max-width: 480px) {
+      .card { padding: 30px 20px; }
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+
+    .back {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .back:hover {
+      background: rgba(31, 59, 46, 0.08);
+      color: var(--text);
+    }
+
+    p.guide {
+      margin: 0 0 32px;
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.6;
+      word-break: keep-all;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0 0 8px 4px; /* 인풋과 정렬 맞춤 */
+    }
+
+    .field-group {
+      margin-bottom: 24px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid transparent; /* 기본 테두리 제거 */
+      background: var(--input-bg);
+      
+      font-family: inherit;
+      font-size: 15px;
+      color: var(--text);
+      outline: none;
+      line-height: 1.5;
+      
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(31, 59, 46, 0.03); /* 아주 약한 그림자 */
+    }
+
+    input:focus, textarea:focus {
+      background: #ffffff;
+      border-color: var(--focus-ring);
+      box-shadow: 0 0 0 3px var(--focus-ring);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: rgba(31, 59, 46, 0.35);
+    }
+
+    textarea {
+      min-height: 200px;
+      resize: none; /* 디자인 유지 위해 리사이즈 끔 (필요시 vertical로 변경) */
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 16px;
+      margin-top: 10px;
+      
+      border-radius: 16px;
+      border: none;
+      
+      background: var(--text); /* 메인과 동일한 Solid 컬러 */
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(31, 59, 46, 0.15);
+    }
+
+    button[type="submit"]:hover {
+      background: #152b21;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(31, 59, 46, 0.25);
+    }
+    
+    button[type="submit"]:active {
+      transform: scale(0.98);
+    }
+
+    .status {
+      display: none;
+      margin-top: 16px;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+      color: var(--text);
+      padding: 10px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 12px;
+    }
+
+    .small {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 20px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ELTNGHJWH3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ELTNGHJWH3');
+  </script>
+</head>
+
+<body>
+  <main class="card">
+    <div class="top">
+      <h1>전달 메시지</h1>
+      <a class="back" href="index.html">← 메인으로</a>
+    </div>
+
+    <p class="guide">STELLA에게 전달할 내용을 작성해 주세요.<br>소중한 메시지는 안전하게 전달됩니다.</p>
+
+    <form id="noteForm">
+      <div class="field-group">
+        <label for="visitorName">방문자 이름</label>
+        <input id="visitorName" name="visitorName" placeholder="성함을 입력해 주세요" required autocomplete="off" />
+      </div>
+
+      <div class="field-group">
+        <label for="contact">연락처 / 이메일</label>
+        <input id="contact" name="contact" placeholder="010-0000-0000 또는 이메일 주소" required autocomplete="off" />
+      </div>
+
+      <div class="field-group">
+        <label for="message">전할 내용</label>
+        <textarea id="message" name="message" placeholder="자유롭게 작성해 주세요..." required></textarea>
+      </div>
+
+      <button type="submit">메시지 보내기</button>
+
+      <div class="status" id="status"></div>
+      <div class="small">
+        제출 후에는 내용은 수정하거나 다시 볼 수 없습니다.<br>오직 STELLA만이 확인할 수 있습니다.
+      </div>
+    </form>
+  </main>
+
+  <script>
+    // 기존 스크립트 로직은 그대로 유지하되, UI와 연결만 확인합니다.
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbybx0Rp5J3y5QVML21YmjvDl9TUTiqu8-sP7LAcS2HwYGbPCR9AoQKO_Sj2AtkHzTNL9A/exec";
+
+    const form = document.getElementById("noteForm");
+    const statusEl = document.getElementById("status");
+
+    // 간단한 연속 제출 방지(20초)
+    const cooldownMs = 20000;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const last = Number(localStorage.getItem("yggda_last_submit") || "0");
+      const now = Date.now();
+      if (now - last < cooldownMs) {
+        statusEl.style.display = "block";
+        statusEl.textContent = "잠시 후 다시 제출해 주세요.";
+        return;
+      }
+
+      statusEl.style.display = "block";
+      statusEl.textContent = "메시지를 안전하게 전달 중입니다...";
+
+      const payload = {
+        visitorName: form.visitorName.value.trim(),
+        contact: form.contact.value.trim(),
+        message: form.message.value.trim(),
+        userAgent: navigator.userAgent,
+        page: location.href,
+        createdAt: new Date().toISOString()
+      };
+
+      try {
+        const res = await fetch(WEB_APP_URL, {
+          method: "POST",
+          mode: "cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+
+        if (data.ok) {
+          localStorage.setItem("yggda_last_submit", String(now));
+          statusEl.textContent = "성공적으로 전달되었습니다. 감사합니다.";
+          statusEl.style.color = "#1f3b2e"; // 성공 시 텍스트 컬러 유지
+          form.reset();
+
+          // GA4 이벤트
+          gtag('event', 'note_submit', {
+            'page_title': document.title
+          });
+
+        } else {
+          statusEl.textContent = "제출 실패: " + (data.error || "알 수 없는 오류");
+        }
+
+      } catch (err) {
+        statusEl.textContent = "네트워크 오류가 발생했습니다.";
+      }
+    });
+  </script>
+</body>
+</html>
