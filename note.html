@@ -383,6 +383,9 @@ statusEl.textContent = data.mailOk ? "전송 완료 + 메일 알림 발송 완�
       } catch (err) {
         statusEl.style.display = "block";
         statusEl.textContent = "네트워크 오류가 발생했습니다.";
+        statusEl.style.display = "block";
+statusEl.textContent = text;
+
         submitBtn.disabled = false;
         submitBtn.textContent = "메시지 보내기";
       }
@@ -398,6 +401,7 @@ statusEl.textContent = data.mailOk ? "전송 완료 + 메일 알림 발송 완�
   </script>
 </body>
 </html>
+
 
 
 
