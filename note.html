@@ -8,6 +8,30 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin />
 
   <style>
+    .consent-text{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.consent-link{
+  align-self: flex-start;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 800;
+  font-size: 13px;
+}
+.consent-link:hover{
+  opacity: 0.85;
+}
+
     :root {
       --bg: #DBE5DC;
       --text: #1f3b2e;
@@ -381,18 +405,21 @@
       </div>
 
       <!-- ✅ 개인정보 수집·이용 동의 (필수) -->
-      <div class="consent">
-        <div class="consent-row">
-          <input id="privacyAgree" name="privacyAgree" type="checkbox" required />
-          <label for="privacyAgree">
-            [필수] 개인정보 수집·이용에 동의합니다.
-            <a href="#" id="openPrivacy" aria-label="개인정보 수집·이용 안내 보기">내용보기</a>
-          </label>
-        </div>
-        <div class="consent-desc">
-          수집 항목: 이름, 연락처(전화/이메일), 메시지, 접속정보(브라우저 정보 등) · 이용 목적: 문의 접수 및 회신 · 보관: 목적 달성 후 지체 없이 파기
-        </div>
-      </div>
+<div class="consent">
+  <div class="consent-row">
+    <input id="privacyAgree" name="privacyAgree" type="checkbox" required />
+
+    <div class="consent-text">
+      <label for="privacyAgree">[필수] 개인정보 수집·이용에 동의합니다.</label>
+      <button type="button" class="consent-link" id="openPrivacy" aria-label="개인정보 수집·이용 안내 보기">내용보기</button>
+    </div>
+  </div>
+
+  <div class="consent-desc">
+    수집 항목: 이름, 연락처(전화/이메일), 메시지, 접속정보(브라우저 정보 등) · 이용 목적: 문의 접수 및 회신 · 보관: 목적 달성 후 지체 없이 파기
+  </div>
+</div>
+
 
       <button type="submit">메시지 보내기</button>
 
@@ -437,30 +464,140 @@
     </div>
   </div>
 
-  <script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzQDQbS1I6o3s-NYljeoDokRAcRZJJS3YzISRiqKHkS4t3H-YuzOFmQHWZuX6BaKB7F/exec";
+ <script>
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzQDQbS1I6o3s-NYljeoDokRAcRZJJS3YzISRiqKHkS4t3H-YuzOFmQHWZuX6BaKB7F/exec";
 
-    const form = document.getElementById("noteForm");
-    const statusEl = document.getElementById("status");
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const doneEl = document.getElementById("done");
-    const sendMoreBtn = document.getElementById("sendMore");
-    const privacyAgreeEl = document.getElementById("privacyAgree");
+  const form = document.getElementById("noteForm");
+  const statusEl = document.getElementById("status");
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const doneEl = document.getElementById("done");
+  const sendMoreBtn = document.getElementById("sendMore");
+  const privacyAgreeEl = document.getElementById("privacyAgree");
 
-    const cooldownMs = 20000;
+  const cooldownMs = 20000;
 
-    // ✅ 개인정보 모달
-    const privacyModal = document.getElementById("privacyModal");
-    const openPrivacy = document.getElementById("openPrivacy");
-    const closePrivacy = document.getElementById("closePrivacy");
+  // ✅ 개인정보 모달
+  const privacyModal = document.getElementById("privacyModal");
+  const openPrivacy = document.getElementById("openPrivacy");
+  const closePrivacy = document.getElementById("closePrivacy");
 
-    function openModal() {
-      privacyModal.style.display = "flex";
-      privacyModal.setAttribute("aria-hidden", "false");
+  function openModal() {
+    privacyModal.style.display = "flex";
+    privacyModal.setAttribute("aria-hidden", "false");
+  }
+
+  function closeModal() {
+    privacyModal.style.display = "none";
+    privacyModal.setAttribute("aria-hidden", "true");
+  }
+
+  // 내용보기 버튼
+  openPrivacy.addEventListener("click", () => {
+    openModal();
+  });
+
+  // 닫기 버튼
+  closePrivacy.addEventListener("click", closeModal);
+
+  // 배경 클릭 시 닫기
+  privacyModal.addEventListener("click", (e) => {
+    if (e.target === privacyModal) closeModal();
+  });
+
+  // ESC로 닫기
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // ✅ 체크박스 미동의 시 차단
+    if (!privacyAgreeEl.checked) {
+      statusEl.style.display = "block";
+      statusEl.textContent = "개인정보 수집·이용 동의가 필요합니다.";
+      return;
     }
-    function closeModal() {
-      privacyModal.style.display = "none";
-      privacyModal.setAttribute("aria-hidden", "true");
+
+    const last = Number(localStorage.getItem("yggda_last_submit") || "0");
+    const now = Date.now();
+    if (now - last < cooldownMs) {
+      statusEl.style.display = "block";
+      statusEl.textContent = "잠시 후 다시 제출해 주세요.";
+      return;
     }
 
-    openP
+    statusEl.style.display = "block";
+    statusEl.textContent = "메시지를 안전하게 전달 중입니다...";
+    submitBtn.disabled = true;
+    submitBtn.textContent = "전송 중...";
+
+    const payload = {
+      visitorName: form.visitorName.value.trim(),
+      contact: form.contact.value.trim(),
+      message: form.message.value.trim(),
+      userAgent: navigator.userAgent,
+      page: location.href,
+      createdAt: new Date().toISOString()
+    };
+
+    try {
+      const params = new URLSearchParams();
+      params.append("visitorName", payload.visitorName);
+      params.append("contact", payload.contact);
+      params.append("message", payload.message);
+      params.append("page", payload.page);
+      params.append("userAgent", payload.userAgent);
+      params.append("createdAt", payload.createdAt);
+
+      const res = await fetch(WEB_APP_URL, {
+        method: "POST",
+        body: params
+      });
+
+      const text = await res.text();
+
+      let data = {};
+      try { data = JSON.parse(text); } catch (e) {}
+
+      if (data.ok) {
+        localStorage.setItem("yggda_last_submit", String(now));
+
+        // ✅ GA4 이벤트(성공만)
+        if (typeof window.gtag === "function") {
+          window.gtag("event", "note_submit", { page_title: document.title });
+        }
+
+        form.reset();
+        form.style.display = "none";
+        doneEl.style.display = "block";
+
+        statusEl.style.display = "block";
+        statusEl.textContent = data.mailOk
+          ? "전송 완료 + 메일 알림 발송 완료"
+          : ("전송 완료(메일 실패): " + (data.mailErr || "원인 미상"));
+
+      } else {
+        statusEl.style.display = "block";
+        statusEl.textContent = "제출 실패: 서버 응답 오류";
+        submitBtn.disabled = false;
+        submitBtn.textContent = "메시지 보내기";
+      }
+
+    } catch (err) {
+      statusEl.style.display = "block";
+      statusEl.textContent = "네트워크 오류가 발생했습니다.";
+      submitBtn.disabled = false;
+      submitBtn.textContent = "메시지 보내기";
+    }
+  });
+
+  sendMoreBtn.addEventListener("click", () => {
+    doneEl.style.display = "none";
+    form.style.display = "block";
+    submitBtn.disabled = false;
+    submitBtn.textContent = "메시지 보내기";
+    statusEl.style.display = "none";
+    privacyAgreeEl.checked = false;
+  });
+</script>
