@@ -466,77 +466,91 @@
   </div>-->
 
  <script>
+(() => {
   const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzQDQbS1I6o3s-NYljeoDokRAcRZJJS3YzISRiqKHkS4t3H-YuzOFmQHWZuX6BaKB7F/exec";
+  const cooldownMs = 20000;
 
   const form = document.getElementById("noteForm");
   const statusEl = document.getElementById("status");
-  const submitBtn = form.querySelector('button[type="submit"]');
+  const submitBtn = form?.querySelector('button[type="submit"]');
   const doneEl = document.getElementById("done");
   const sendMoreBtn = document.getElementById("sendMore");
   const privacyAgreeEl = document.getElementById("privacyAgree");
 
-  const cooldownMs = 20000;
+  // ✅ JS가 아예 안 도는/에러 나는 경우 화면에 표시
+  function showStatus(msg) {
+    if (!statusEl) return;
+    statusEl.style.display = "block";
+    statusEl.textContent = msg;
+  }
 
-  // ✅ 개인정보 모달
+  window.addEventListener("error", (e) => {
+    showStatus("스크립트 오류: " + (e?.message || "알 수 없음"));
+  });
+
+  if (!form || !statusEl || !submitBtn) {
+    showStatus("초기화 오류: 폼 요소를 찾지 못했습니다. (id 확인: noteForm/status)");
+    return;
+  }
+
+  // ✅ 모달(내용보기) 사용 중이면 연결, 없으면 무시
   const privacyModal = document.getElementById("privacyModal");
   const openPrivacy = document.getElementById("openPrivacy");
   const closePrivacy = document.getElementById("closePrivacy");
 
   function openModal() {
+    if (!privacyModal) return;
     privacyModal.style.display = "flex";
     privacyModal.setAttribute("aria-hidden", "false");
   }
-
   function closeModal() {
+    if (!privacyModal) return;
     privacyModal.style.display = "none";
     privacyModal.setAttribute("aria-hidden", "true");
   }
 
-  // 내용보기 버튼
-  openPrivacy.addEventListener("click", () => {
-    openModal();
-  });
+  if (openPrivacy && privacyModal) {
+    openPrivacy.addEventListener("click", (e) => {
+      e.preventDefault?.();
+      openModal();
+    });
+  }
+  if (closePrivacy && privacyModal) closePrivacy.addEventListener("click", closeModal);
+  if (privacyModal) {
+    privacyModal.addEventListener("click", (e) => {
+      if (e.target === privacyModal) closeModal();
+    });
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+  }
 
-  // 닫기 버튼
-  closePrivacy.addEventListener("click", closeModal);
-
-  // 배경 클릭 시 닫기
-  privacyModal.addEventListener("click", (e) => {
-    if (e.target === privacyModal) closeModal();
-  });
-
-  // ESC로 닫기
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeModal();
-  });
-
+  // ✅ 핵심: 기본 제출(리로드) 완전 차단 + 상태 표시
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
-    // ✅ 체크박스 미동의 시 차단
-    if (!privacyAgreeEl.checked) {
-      statusEl.style.display = "block";
-      statusEl.textContent = "개인정보 수집·이용 동의가 필요합니다.";
+    // 동의 체크(존재할 때만)
+    if (privacyAgreeEl && !privacyAgreeEl.checked) {
+      showStatus("개인정보 수집·이용 동의가 필요합니다.");
       return;
     }
 
     const last = Number(localStorage.getItem("yggda_last_submit") || "0");
     const now = Date.now();
     if (now - last < cooldownMs) {
-      statusEl.style.display = "block";
-      statusEl.textContent = "잠시 후 다시 제출해 주세요.";
+      showStatus("연속 제출을 방지하기 위해 20초 후 다시 전송할 수 있습니다.");
       return;
     }
 
-    statusEl.style.display = "block";
-    statusEl.textContent = "메시지를 안전하게 전달 중입니다...";
+    showStatus("메시지를 안전하게 전달 중입니다...");
     submitBtn.disabled = true;
     submitBtn.textContent = "전송 중...";
 
     const payload = {
-      visitorName: form.visitorName.value.trim(),
-      contact: form.contact.value.trim(),
-      message: form.message.value.trim(),
+      visitorName: form.visitorName?.value?.trim?.() || "",
+      contact: form.contact?.value?.trim?.() || "",
+      message: form.message?.value?.trim?.() || "",
       userAgent: navigator.userAgent,
       page: location.href,
       createdAt: new Date().toISOString()
@@ -551,58 +565,55 @@
       params.append("userAgent", payload.userAgent);
       params.append("createdAt", payload.createdAt);
 
-      const res = await fetch(WEB_APP_URL, {
-        method: "POST",
-        body: params
-      });
-
+      const res = await fetch(WEB_APP_URL, { method: "POST", body: params });
       const text = await res.text();
 
       let data = {};
-      try { data = JSON.parse(text); } catch (e) {}
+      try { data = JSON.parse(text); } catch (err) {}
 
       if (data.ok) {
         localStorage.setItem("yggda_last_submit", String(now));
 
-        // ✅ GA4 이벤트(성공만)
         if (typeof window.gtag === "function") {
           window.gtag("event", "note_submit", { page_title: document.title });
         }
 
         form.reset();
-        form.style.display = "none";
-        doneEl.style.display = "block";
 
-        statusEl.style.display = "block";
-        statusEl.textContent = data.mailOk
-          ? "전송 완료 + 메일 알림 발송 완료"
-          : ("전송 완료(메일 실패): " + (data.mailErr || "원인 미상"));
+        // done 화면이 있으면 전환, 없으면 status만 표시
+        if (doneEl) {
+          form.style.display = "none";
+          doneEl.style.display = "block";
+        }
 
+        showStatus(data.mailOk ? "전송 완료 + 메일 알림 발송 완료"
+                              : ("전송 완료(메일 실패): " + (data.mailErr || "원인 미상")));
       } else {
-        statusEl.style.display = "block";
-        statusEl.textContent = "제출 실패: 서버 응답 오류";
+        showStatus("제출 실패: 서버 응답 오류 (" + (text || "빈 응답") + ")");
         submitBtn.disabled = false;
         submitBtn.textContent = "메시지 보내기";
       }
-
     } catch (err) {
-      statusEl.style.display = "block";
-      statusEl.textContent = "네트워크 오류가 발생했습니다.";
+      showStatus("네트워크 오류: " + (err?.message || "알 수 없음"));
       submitBtn.disabled = false;
       submitBtn.textContent = "메시지 보내기";
     }
   });
 
-  sendMoreBtn.addEventListener("click", () => {
-    doneEl.style.display = "none";
-    form.style.display = "block";
-    submitBtn.disabled = false;
-    submitBtn.textContent = "메시지 보내기";
-    statusEl.style.display = "none";
-    privacyAgreeEl.checked = false;
-  });
+  if (sendMoreBtn) {
+    sendMoreBtn.addEventListener("click", () => {
+      if (doneEl) doneEl.style.display = "none";
+      form.style.display = "block";
+      submitBtn.disabled = false;
+      submitBtn.textContent = "메시지 보내기";
+      statusEl.style.display = "none";
+      if (privacyAgreeEl) privacyAgreeEl.checked = false;
+    });
+  }
+})();
 </script>
   </body>
 </html>
+
 
 
