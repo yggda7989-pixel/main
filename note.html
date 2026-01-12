@@ -239,6 +239,107 @@
       color: #1f3b2e;
     }
 
+    /* ✅ 개인정보 동의 영역 */
+    .consent {
+      margin-top: 14px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.45);
+      border: 1px solid rgba(255,255,255,0.65);
+    }
+    .consent-row{
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .consent input[type="checkbox"]{
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: #1f3b2e;
+      box-shadow: none;
+    }
+    .consent label{
+      margin: 0;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.45;
+      cursor: pointer;
+    }
+    .consent a{
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-weight: 700;
+    }
+    .consent-desc{
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ✅ 모달 */
+    .modal-backdrop{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 9999;
+    }
+    .modal{
+      width: 100%;
+      max-width: 640px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: 0 16px 48px rgba(31,59,46,0.18);
+      overflow: hidden;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .modal-header{
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(31,59,46,0.10);
+    }
+    .modal-title{
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .modal-close{
+      border: none;
+      background: rgba(31,59,46,0.08);
+      color: #1f3b2e;
+      border-radius: 12px;
+      padding: 10px 12px;
+      cursor: pointer;
+      font-weight: 800;
+    }
+    .modal-body{
+      padding: 16px 18px 18px;
+      color: #1f3b2e;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .modal-body ul{
+      margin: 8px 0 0 18px;
+      padding: 0;
+    }
+    .modal-body li{
+      margin: 4px 0;
+    }
+    .modal-body .muted{
+      color: rgba(31,59,46,0.72);
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
     @keyframes fadeInUp {
       to { opacity: 1; transform: translateY(0); }
     }
@@ -279,6 +380,20 @@
         <textarea id="message" name="message" placeholder="자유롭게 작성해 주세요..." required></textarea>
       </div>
 
+      <!-- ✅ 개인정보 수집·이용 동의 (필수) -->
+      <div class="consent">
+        <div class="consent-row">
+          <input id="privacyAgree" name="privacyAgree" type="checkbox" required />
+          <label for="privacyAgree">
+            [필수] 개인정보 수집·이용에 동의합니다.
+            <a href="#" id="openPrivacy" aria-label="개인정보 수집·이용 안내 보기">내용보기</a>
+          </label>
+        </div>
+        <div class="consent-desc">
+          수집 항목: 이름, 연락처(전화/이메일), 메시지, 접속정보(브라우저 정보 등) · 이용 목적: 문의 접수 및 회신 · 보관: 목적 달성 후 지체 없이 파기
+        </div>
+      </div>
+
       <button type="submit">메시지 보내기</button>
 
       <div class="status" id="status"></div>
@@ -300,112 +415,52 @@
     </div>
   </main>
 
+  <!-- ✅ 개인정보 안내 모달 -->
+  <div class="modal-backdrop" id="privacyModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">개인정보 수집·이용 안내</div>
+        <button class="modal-close" type="button" id="closePrivacy">닫기</button>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><b>수집 항목</b>: 방문자 이름, 연락처(전화/이메일), 메시지, 접속정보(브라우저 정보, 접속 페이지, 작성 시각)</li>
+          <li><b>이용 목적</b>: 메시지 접수 및 회신, 서비스 운영 및 부정 이용 방지</li>
+          <li><b>보관 기간</b>: 목적 달성 후 지체 없이 파기(단, 관계 법령에 따라 보관이 필요한 경우 해당 기간 보관)</li>
+          <li><b>처리 위탁/외부 처리</b>: Google Apps Script(전송 처리), Google Analytics 4(이용 분석)</li>
+          <li><b>동의 거부 권리</b>: 동의를 거부할 수 있으나, 거부 시 메시지 접수가 제한됩니다.</li>
+        </ul>
+        <div class="muted">
+          더 상세한 내용은 별도 개인정보처리방침에서 안내할 수 있습니다.
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzQDQbS1I6o3s-NYljeoDokRAcRZJJS3YzISRiqKHkS4t3H-YuzOFmQHWZuX6BaKB7F/exec";
-    
 
     const form = document.getElementById("noteForm");
     const statusEl = document.getElementById("status");
     const submitBtn = form.querySelector('button[type="submit"]');
     const doneEl = document.getElementById("done");
     const sendMoreBtn = document.getElementById("sendMore");
+    const privacyAgreeEl = document.getElementById("privacyAgree");
 
     const cooldownMs = 20000;
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+    // ✅ 개인정보 모달
+    const privacyModal = document.getElementById("privacyModal");
+    const openPrivacy = document.getElementById("openPrivacy");
+    const closePrivacy = document.getElementById("closePrivacy");
 
-      const last = Number(localStorage.getItem("yggda_last_submit") || "0");
-      const now = Date.now();
-      if (now - last < cooldownMs) {
-        statusEl.style.display = "block";
-        statusEl.textContent = "잠시 후 다시 제출해 주세요.";
-        return;
-      }
+    function openModal() {
+      privacyModal.style.display = "flex";
+      privacyModal.setAttribute("aria-hidden", "false");
+    }
+    function closeModal() {
+      privacyModal.style.display = "none";
+      privacyModal.setAttribute("aria-hidden", "true");
+    }
 
-      statusEl.style.display = "block";
-      statusEl.textContent = "메시지를 안전하게 전달 중입니다...";
-      submitBtn.disabled = true;
-      submitBtn.textContent = "전송 중...";
-
-      const payload = {
-        visitorName: form.visitorName.value.trim(),
-        contact: form.contact.value.trim(),
-        message: form.message.value.trim(),
-        userAgent: navigator.userAgent,
-        page: location.href,
-        createdAt: new Date().toISOString()
-      };
-
-      try {
-        // ✅ 폼 전송 방식
-        const params = new URLSearchParams();
-        params.append("visitorName", payload.visitorName);
-        params.append("contact", payload.contact);
-        params.append("message", payload.message);
-        params.append("page", payload.page);
-        params.append("userAgent", payload.userAgent);
-        params.append("createdAt", payload.createdAt);
-
-        const res = await fetch(WEB_APP_URL, {
-          method: "POST",
-          body: params
-        });
-
-        const text = await res.text();
-        statusEl.style.display = "block";
-statusEl.textContent = "서버 응답: " + text;
-
-        let data = {};
-        try { data = JSON.parse(text); } catch(e) {}
-
-        if (data.ok) {
-          localStorage.setItem("yggda_last_submit", String(now));
-
-          // GA4 이벤트(성공만)
-          gtag("event", "note_submit", { page_title: document.title });
-
-          // 폼 초기화 후 완료 화면 표시
-          form.reset();
-          form.style.display = "none";
-          doneEl.style.display = "block";
-
-          statusEl.style.display = "block";
-statusEl.textContent = data.mailOk ? "전송 완료 + 메일 알림 발송 완료" : ("전송 완료(메일 실패): " + data.mailErr);
-
-
-        } else {
-          statusEl.style.display = "block";
-          statusEl.textContent = "제출 실패: 서버 응답 오류";
-          submitBtn.disabled = false;
-          submitBtn.textContent = "메시지 보내기";
-        }
-
-      } catch (err) {
-        statusEl.style.display = "block";
-        statusEl.textContent = "네트워크 오류가 발생했습니다.";
-        statusEl.style.display = "block";
-statusEl.textContent = text;
-
-        submitBtn.disabled = false;
-        submitBtn.textContent = "메시지 보내기";
-      }
-    });
-
-    sendMoreBtn.addEventListener("click", () => {
-      doneEl.style.display = "none";
-      form.style.display = "block";
-      submitBtn.disabled = false;
-      submitBtn.textContent = "메시지 보내기";
-      statusEl.style.display = "none";
-    });
-  </script>
-</body>
-</html>
-
-
-
-
-
-
-
+    openP
