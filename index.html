@@ -8,17 +8,19 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin />
 
   <style>
-:root {
-  /* EPS 기반 팔레트 */
-  --bg: #FFCC99;                  /* 메인 배경 (따뜻한 피치) */
-  --text: #663300;                /* 본문 텍스트 (딥 브라운) */
-  --text-muted: rgba(102, 51, 0, 0.65);
+:root{
+  --bg: #DAB27D;
+  --text: #3B241A;
+  --text-muted: rgba(59, 36, 26, 0.65);
 
-  /* 이미지 크기 유지 */
+  --btn: #A07368;
+  --btn-hover: #825C42;
+
   --img-width: 20vw;
   --img-max: 260px;
   --img-min: 140px;
 }
+
 
 
     * { box-sizing: border-box; }
@@ -68,21 +70,14 @@
       .tagline { white-space: normal; word-break: keep-all; }
     }
 
-    .enter {
-      margin-top: 12px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background-color: var(--text);
-      color: #fff;
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      padding: 14px 32px;
-      border-radius: 100px;
-      box-shadow: 0 4px 12px rgba(31, 59, 46, 0.15);
-      transition: all 0.3s ease;
-    }
+.enter{
+  background-color: var(--btn);
+  color:#fff;
+}
+.enter:hover{
+  background-color: var(--btn-hover);
+}
+
 
     .enter:hover {
       transform: translateY(-2px);
@@ -111,7 +106,7 @@
 
 <body>
   <main class="wrap">
-    <img src="logo.png" alt="YGGDA 로고">
+<img src="yggda.svg" alt="YGGDA 로고">
     <p class="tagline">성장을 여는 길, 도약을 향한 목적지</p>
     <!-- ✅ 클릭 이벤트(enter_click) -->
     <a class="enter" href="note.html"
@@ -121,6 +116,7 @@
   </main>
 </body>
 </html>
+
 
 
 
