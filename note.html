@@ -32,19 +32,21 @@
   opacity: 0.85;
 }
 
-:root {
-  /* EPS 기반 팔레트 */
-  --bg: #FFCC99;
-  --text: #663300;
-  --text-muted: rgba(102, 51, 0, 0.60);
+:root{
+  --bg: #DAB27D;
+  --text: #3B241A;
+  --text-muted: rgba(59, 36, 26, 0.65);
 
-  /* 카드/입력 UI: 따뜻한 톤의 글래스 */
-  --card-bg: rgba(255, 255, 255, 0.45);
-  --card-border: rgba(255, 204, 153, 0.65);
+  --btn: #A07368;
+  --btn-hover: #825C42;
 
-  --input-bg: rgba(255, 255, 255, 0.55);
-  --focus-ring: rgba(204, 153, 102, 0.35); /* #CC9966 기반 */
+  --card-bg: rgba(255,255,255,0.28);
+  --card-border: rgba(59,36,26,0.18);
+
+  --input-bg: rgba(255,255,255,0.35);
+  --focus-ring: rgba(130,92,66,0.28);
 }
+
 
 
     * { box-sizing: border-box; }
@@ -153,20 +155,14 @@
 
     textarea { min-height: 200px; resize: none; }
 
-    button[type="submit"] {
-      width: 100%;
-      padding: 16px;
-      margin-top: 10px;
-      border-radius: 16px;
-      border: none;
-      background: var(--text);
-      color: #fff;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s;
-      box-shadow: 0 4px 12px rgba(31, 59, 46, 0.15);
-    }
+button[type="submit"]{
+  background: var(--btn);
+  color:#fff;
+}
+button[type="submit"]:hover{
+  background: var(--btn-hover);
+}
+
 
     button[type="submit"]:hover {
       background: #330000;
@@ -620,6 +616,7 @@
 </script>
   </body>
 </html>
+
 
 
 
