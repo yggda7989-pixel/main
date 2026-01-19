@@ -8,17 +8,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin />
 
   <style>
-    :root{
-      /* ✅ STELLA 지정 팔레트 */
-      --bg: #DAB27D;
-
-      --text: #3B241A;
-      --text-muted: rgba(59, 36, 26, 0.65);
-
-      --btn: #A07368;
-      --btn-hover: #825C42;
-
-      /* 로고 크기 */
+    :root {
+      --bg: #DBE5DC;
+      --text: #1f3b2e;
+      --text-muted: rgba(31, 59, 46, 0.65);
       --img-width: 20vw;
       --img-max: 260px;
       --img-min: 140px;
@@ -26,7 +19,7 @@
 
     * { box-sizing: border-box; }
 
-    body{
+    body {
       margin: 0;
       min-height: 100vh;
       display: flex;
@@ -34,80 +27,71 @@
       justify-content: center;
       background: var(--bg);
       color: var(--text);
-      font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+      font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
       -webkit-font-smoothing: antialiased;
     }
 
-    .wrap{
+    .wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      gap: 22px;
+      gap: 24px;
       padding: 40px 24px;
-
       opacity: 0;
       transform: translateY(20px);
-      animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-.logo{
-  width: clamp(var(--img-min), var(--img-width), var(--img-max));
-  height: auto;
-  display: block;
-  margin-bottom: 4px;
-  object-fit: contain;
-  filter: none; /* 일단 깨짐 원인 제거 */
-}
+    img {
+      width: clamp(var(--img-min), var(--img-width), var(--img-max));
+      height: auto;
+      display: block;
+      margin-bottom: 8px;
+    }
 
-
-    .tagline{
+    .tagline {
       font-size: clamp(15px, 1.5vw, 18px);
-      font-weight: 600;
+      font-weight: 500;
       letter-spacing: -0.02em;
       line-height: 1.6;
       color: var(--text-muted);
       margin: 0;
       white-space: nowrap;
-      word-break: keep-all;
     }
 
-    @media (max-width: 380px){
-      .tagline{ white-space: normal; }
+    @media (max-width: 380px) {
+      .tagline { white-space: normal; word-break: keep-all; }
     }
 
-    .enter{
-      margin-top: 10px;
+    .enter {
+      margin-top: 12px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-
-      background-color: var(--btn);
+      background-color: var(--text);
       color: #fff;
-
       font-size: 15px;
-      font-weight: 800;
+      font-weight: 600;
       text-decoration: none;
-
       padding: 14px 32px;
-      border-radius: 999px;
-
-      box-shadow: 0 8px 22px rgba(130, 92, 66, 0.28);
-      transition: all 0.28s ease;
+      border-radius: 100px;
+      box-shadow: 0 4px 12px rgba(31, 59, 46, 0.15);
+      transition: all 0.3s ease;
     }
 
-    .enter:hover{
-      background-color: var(--btn-hover);
+    .enter:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 26px rgba(130, 92, 66, 0.36);
+      box-shadow: 0 6px 16px rgba(31, 59, 46, 0.25);
+      background-color: #152b21;
     }
 
-    .enter:active{
+    .enter:active {
       transform: scale(0.98);
     }
 
-    @keyframes fadeInUp{
-      to{ opacity: 1; transform: translateY(0); }
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 
@@ -123,11 +107,8 @@
 
 <body>
   <main class="wrap">
-    <!-- ✅ 로고: SVG 사용 -->
-    <img class="logo" src="yggda.svg" alt="YGGDA 로고">
-
+    <img src="logo.png" alt="YGGDA 로고">
     <p class="tagline">성장을 여는 길, 도약을 향한 목적지</p>
-
     <!-- ✅ 클릭 이벤트(enter_click) -->
     <a class="enter" href="note.html"
        onclick="gtag('event','enter_click',{page_title:document.title});">
@@ -136,4 +117,5 @@
   </main>
 </body>
 </html>
+
 

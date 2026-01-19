@@ -32,22 +32,15 @@
   opacity: 0.85;
 }
 
-:root{
-  --bg: #DAB27D;
-  --text: #3B241A;
-  --text-muted: rgba(59, 36, 26, 0.65);
-
-  --btn: #A07368;
-  --btn-hover: #825C42;
-
-  --card-bg: rgba(255,255,255,0.28);
-  --card-border: rgba(59,36,26,0.18);
-
-  --input-bg: rgba(255,255,255,0.35);
-  --focus-ring: rgba(130,92,66,0.28);
-}
-
-
+    :root {
+      --bg: #DBE5DC;
+      --text: #1f3b2e;
+      --text-muted: rgba(31, 59, 46, 0.6);
+      --card-bg: rgba(255, 255, 255, 0.5);
+      --card-border: rgba(255, 255, 255, 0.6);
+      --input-bg: rgba(255, 255, 255, 0.6);
+      --focus-ring: rgba(31, 59, 46, 0.2);
+    }
 
     * { box-sizing: border-box; }
 
@@ -155,17 +148,23 @@
 
     textarea { min-height: 200px; resize: none; }
 
-button[type="submit"]{
-  background: var(--btn);
-  color:#fff;
-}
-button[type="submit"]:hover{
-  background: var(--btn-hover);
-}
-
+    button[type="submit"] {
+      width: 100%;
+      padding: 16px;
+      margin-top: 10px;
+      border-radius: 16px;
+      border: none;
+      background: var(--text);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(31, 59, 46, 0.15);
+    }
 
     button[type="submit"]:hover {
-      background: #330000;
+      background: #152b21;
       transform: translateY(-2px);
       box-shadow: 0 6px 16px rgba(31, 59, 46, 0.25);
     }
@@ -277,10 +276,13 @@ button[type="submit"]:hover{
       gap: 10px;
       align-items: flex-start;
     }
-.consent input[type="checkbox"]{
-  accent-color: var(--btn-hover);
-}
-
+    .consent input[type="checkbox"]{
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: #1f3b2e;
+      box-shadow: none;
+    }
     .consent label{
       margin: 0;
       font-size: 13px;
@@ -613,10 +615,6 @@ button[type="submit"]:hover{
 </script>
   </body>
 </html>
-
-
-
-
 
 
 
