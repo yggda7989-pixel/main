@@ -51,13 +51,15 @@
       animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    .logo{
-      width: clamp(var(--img-min), var(--img-width), var(--img-max));
-      height: auto;
-      display: block;
-      margin-bottom: 4px;
-      filter: drop-shadow(0 8px 16px rgba(130, 92, 66, 0.18));
-    }
+.logo{
+  width: clamp(var(--img-min), var(--img-width), var(--img-max));
+  height: auto;
+  display: block;
+  margin-bottom: 4px;
+  object-fit: contain;
+  filter: none; /* 일단 깨짐 원인 제거 */
+}
+
 
     .tagline{
       font-size: clamp(15px, 1.5vw, 18px);
@@ -134,3 +136,4 @@
   </main>
 </body>
 </html>
+
