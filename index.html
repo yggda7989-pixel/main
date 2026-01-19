@@ -9,9 +9,11 @@
 
   <style>
     :root {
-      --bg: #DBE5DC;
-      --text: #1f3b2e;
-      --text-muted: rgba(31, 59, 46, 0.65);
+      --bg: #d4ae7c;
+      --text: #3B241A;
+      --text-muted: rgba(59, 36, 26, 0.65);
+      --btn: #A07368;
+      --btn-hover: #825C42;
       --img-width: 20vw;
       --img-max: 260px;
       --img-min: 140px;
@@ -64,34 +66,38 @@
       .tagline { white-space: normal; word-break: keep-all; }
     }
 
-    .enter {
-      margin-top: 12px;
+   .enter{
+      margin-top: 10px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background-color: var(--text);
+
+      background-color: var(--btn);
       color: #fff;
+
       font-size: 15px;
-      font-weight: 600;
+      font-weight: 800;
       text-decoration: none;
+
       padding: 14px 32px;
-      border-radius: 100px;
-      box-shadow: 0 4px 12px rgba(31, 59, 46, 0.15);
-      transition: all 0.3s ease;
+      border-radius: 999px;
+
+      box-shadow: 0 8px 22px rgba(130, 92, 66, 0.28);
+      transition: all 0.28s ease;
     }
 
-    .enter:hover {
+    .enter:hover{
+      background-color: var(--btn-hover);
       transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(31, 59, 46, 0.25);
-      background-color: #152b21;
+      box-shadow: 0 10px 26px rgba(130, 92, 66, 0.36);
     }
 
-    .enter:active {
+    .enter:active{
       transform: scale(0.98);
     }
 
-    @keyframes fadeInUp {
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes fadeInUp{
+      to{ opacity: 1; transform: translateY(0); }
     }
   </style>
 
@@ -117,5 +123,6 @@
   </main>
 </body>
 </html>
+
 
 
