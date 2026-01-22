@@ -1,8 +1,7 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ELTNGHJWH3"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ELTNGHJWH3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -45,32 +44,68 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      gap: 24px;
+      gap: 16px; /* 간격 미세 조정 */
       padding: 20px 14px;
       opacity: 0;
       transform: translateY(20px);
       animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      max-width: 500px; /* 텍스트가 너무 퍼지지 않게 제한 */
     }
 
     img {
       width: clamp(var(--img-min), var(--img-width), var(--img-max));
       height: auto;
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
 
+    /* 기존 태그라인 */
     .tagline {
-      font-size: clamp(15px, 1.5vw, 18px);
+      font-size: clamp(14px, 1.4vw, 16px);
       font-weight: 500;
       letter-spacing: -0.02em;
       line-height: 1.6;
-      color: #69391c;
+      color: var(--text);
       margin: 0;
-      white-space: nowrap;
+      opacity: 0.8;
+    }
+
+    /* 이미지 내 문구 (메인 타이틀) */
+    .main-copy {
+      font-size: clamp(18px, 2vw, 22px);
+      font-weight: 700;
+      color: var(--text);
+      margin: 12px 0 2px 0;
+      line-height: 1.35;
+      word-break: keep-all;
+    }
+
+    /* 이미지 내 영문 (서브 타이틀) */
+    .sub-copy {
+      font-size: clamp(13px, 1.2vw, 15px);
+      color: #9c7c65; /* 이미지의 영문 색상과 유사하게 조정 */
+      margin: 0;
+      font-weight: 400;
+    }
+
+    /* 팀 소개 설명 */
+    .description {
+      font-size: clamp(14px, 1.4vw, 16px);
+      font-weight: 400;
+      line-height: 1.5;
+      margin-top: 12px;
+      word-break: keep-all;
+    }
+
+    /* 서비스 준비중 */
+    .status {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
     }
 
     @media (max-width: 380px) {
-      .tagline { white-space: normal; word-break: keep-all; }
+      .tagline, .main-copy { white-space: normal; word-break: keep-all; }
     }
 
     .enter {
@@ -104,7 +139,6 @@
     }
   </style>
 
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ELTNGHJWH3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -117,8 +151,22 @@
 <body>
   <main class="wrap">
     <img src="logo.png" alt="YGGDA 로고">
+    
     <p class="tagline">성장을 여는 길, 도약을 향한 목적지</p>
-    <!-- ✅ 클릭 이벤트(enter_click) -->
+
+    <div>
+        <h1 class="main-copy">전략에서 개발까지, 기획 중심 디지털 구축 전문</h1>
+        <p class="sub-copy">Strategy · UX · Development Execution</p>
+    </div>
+
+    <div>
+        <p class="description">
+            전 구성원 공공기관 및 대기업,<br>
+            글로벌 플랫폼 서비스 경력의 강력한 팀 구성 완료
+        </p>
+        <p class="status">서비스 준비중..</p>
+    </div>
+
     <a class="enter" href="note.html"
        onclick="gtag('event','enter_click',{page_title:document.title});">
       똑!똑!
@@ -126,9 +174,3 @@
   </main>
 </body>
 </html>
-
-
-
-
-
-
