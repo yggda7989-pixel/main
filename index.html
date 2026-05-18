@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta name="robots" content="noindex, nofollow" />
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ELTNGHJWH3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ELTNGHJWH3');
+  </script>
+  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YGGDA</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin />
+
+  <style>
+    :root {
+      --bg: #dab27d;
+      --text: #69391c;
+      --text-muted: #8b5a3c;
+      --accent: #69391d;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Pretendard Variable", Pretendard, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 24px; 
+      padding: 40px 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      max-width: 600px;
+    }
+
+    /* 메인 타이틀 */
+    .main-copy {
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 700;
+      color: var(--text);
+      margin: 0;
+      line-height: 1.4;
+      word-break: keep-all;
+    }
+
+    /* 서브 타이틀 */
+    .sub-copy {
+      font-size: clamp(16px, 1.8vw, 20px);
+      color: #69391c; 
+      margin: 8px 0 0 0;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    /* 새로 추가된 소개 영역 스타일 */
+    .intro-box {
+      background: rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(105, 57, 28, 0.15);
+      padding: 24px 28px;
+      border-radius: 16px;
+      text-align: left;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text);
+      margin: 4px 0;
+      box-shadow: 0 4px 15px rgba(105, 57, 29, 0.05);
+      width: 100%;
+    }
+
+    .intro-title {
+      font-weight: 700;
+      margin: 0 0 12px 0;
+      color: var(--accent);
+      font-size: 16px;
+    }
+
+    .intro-box ul {
+      margin: 0 0 16px 0;
+      padding-left: 22px;
+      word-break: keep-all;
+    }
+
+    .intro-box li {
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .intro-highlight {
+      margin: 0;
+      font-weight: 800;
+      text-align: center;
+      font-size: 17px;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+      background: rgba(255, 255, 255, 0.4);
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    /* 서비스 준비중 */
+    .status {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.2);
+      padding: 6px 16px;
+      border-radius: 20px;
+      display: inline-block;
+      margin: 0;
+    }
+
+    .enter {
+      margin-top: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--accent);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 16px 40px;
+      border-radius: 100px;
+      box-shadow: 0 4px 15px rgba(105, 57, 29, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .enter:hover {
+      transform: translateY(-2px);
+      background-color: #4a2713;
+      box-shadow: 0 6px 20px rgba(105, 57, 29, 0.3);
+    }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 팝업 스타일 */
+    #yggda-popup {
+      display:none; position:fixed; top:30px; left:50%; transform:translateX(-50%); 
+      background:rgba(255,255,255,0.98); color:#69391c; padding:15px 25px; 
+      border-radius:50px; font-size:15px; font-weight:600; z-index:1000; 
+      box-shadow:0 8px 25px rgba(105, 57, 28, 0.15); border:1px solid rgba(105, 57, 28, 0.1);
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <div>
+        <h1 class="main-copy">전략에서 개발까지, 기획 중심 디지털 구축 전문</h1>
+        <p class="sub-copy">Strategy · UX · Development Execution</p>
+    </div>
+
+    <div class="intro-box">
+      <ul>
+        <li>디자이너의 의도를 해치지 않으면서 (디자인 전공)</li>
+        <li>사용자와 비즈니스 관점을 설계하고 (UX/ISP 컨설팅)</li>
+        <li>구현 가능성까지 판단할 수 있는 (IT 실무 경험)</li>
+      </ul>
+      <p class="intro-highlight">풀스택 디렉터(Full-stack Director)</p>
+    </div>
+
+    <a class="enter" href="note.html"
+       onclick="gtag('event','enter_click',{page_title:document.title});">
+       똑!똑!
+    </a>
+  </main>
+
+  <div id="yggda-popup">
+    <div id="yggda-message" style="display:flex; align-items:center; gap:8px;"></div>
+  </div>
+
+  <script>
+    (function() {
+      // 로컬 스토리지를 이용한 방문 횟수 카운팅
+      let yggdaVisit = localStorage.getItem('yggda_real_visit') || 0;
+      yggdaVisit = parseInt(yggdaVisit) + 1;
+      localStorage.setItem('yggda_real_visit', yggdaVisit);
+
+      // 랜덤 방문자 수 생성 (예시: 48명 ~ 59명)
+      const totalCount = Math.floor(Math.random() * (59 - 48 + 1)) + 48;
+      
+      const popup = document.getElementById('yggda-popup');
+      const msg = document.getElementById('yggda-message');
+
+      // 방문 횟수에 따른 메시지 분기 처리
+      if (yggdaVisit === 1) {
+        msg.innerHTML = `🌱 반갑습니다! 오늘 <span style="color:#dab27d; background:#69391c; padding:2px 8px; border-radius:10px; margin:0 4px; color:#fff;">${totalCount}번째</span> 주인공이 되셨네요.`;
+      } else {
+        msg.innerHTML = `✨ <span style="color:#dab27d; background:#69391c; padding:2px 8px; border-radius:10px; margin:0 4px; color:#fff;">${yggdaVisit}회차</span> 재방문! 오늘 ${totalCount}명이 YGGDA와 함께하고 있습니다.`;
+      }
+
+      // 팝업 애니메이션 띄우기
+      setTimeout(() => {
+        popup.style.display = 'block';
+        popup.animate([
+          { transform: 'translate(-50%, -20px)', opacity: 0 },
+          { transform: 'translate(-50%, 0)', opacity: 1 }
+        ], { duration: 600, easing: 'ease-out', fill: 'forwards' });
+      }, 1000);
+
+      // 일정 시간(5초) 후 팝업 숨기기
+      setTimeout(() => {
+        popup.style.opacity = '0';
+        popup.style.transition = 'opacity 0.5s ease';
+        setTimeout(() => { popup.style.display = 'none'; }, 500);
+      }, 5000); 
+    })();
+  </script>
+</body>
+</html>
