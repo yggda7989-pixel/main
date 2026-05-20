@@ -49,6 +49,27 @@
       max-width: 600px;
     }
 
+    /* 프로덕트 빌딩 상태 배지 */
+    .status-badge {
+      display: inline-block;
+      background: var(--text);
+      color: #fff;
+      font-size: 13.5px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: -10px;
+      letter-spacing: 0.02em;
+      box-shadow: 0 4px 10px rgba(105, 57, 29, 0.2);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-4px); }
+      100% { transform: translateY(0px); }
+    }
+
     /* 메인 타이틀 */
     .main-copy {
       font-size: clamp(20px, 2.5vw, 28px);
@@ -121,6 +142,11 @@
       line-height: 1.6;
       word-break: keep-all;
     }
+    
+    .intro-desc strong {
+      color: var(--accent);
+      font-weight: 700;
+    }
 
     .intro-highlight {
       margin: 0;
@@ -135,7 +161,7 @@
       width: 100%;
     }
 
-    /* 사업 분야 (추가된 영역) */
+    /* 사업 분야 */
     .domain-area {
       display: flex;
       flex-direction: column;
@@ -205,6 +231,9 @@
 
 <body>
   <main class="wrap">
+    
+    <div class="status-badge">🚀 현재 자체 서비스(Product) 빌딩 중</div>
+
     <div>
         <h1 class="main-copy">전략에서 개발까지, 기획 중심 디지털 구축 전문</h1>
         <p class="sub-copy">Strategy · UX · Development Execution</p>
@@ -218,14 +247,14 @@
         <li><strong>Technology</strong> 기술적 타당성을 바탕으로 한 실현 가능한 구현</li>
       </ul>
       <div class="intro-desc">
-        단일 디렉터가 프로젝트 전 과정을 총괄하여 일관성 있는 퀄리티를 보장하며, 프로젝트 특성에 맞춰 검증된 시니어 파트너들과 애자일(Agile)하게 협업합니다.
+        탄탄한 기획·디자인 디렉팅 역량과 특급 시니어 엔지니어들의 깊이 있는 기술력이 만나, <strong>완성도 높은 자체 프로덕트를 선보이기 위해 치열하게 분투하고 있습니다.</strong>
       </div>
     </div>
     
     <div class="intro-highlight">풀스택 디렉터(Full-stack Director)</div>
 
     <div class="domain-area">
-      <span class="domain-label">Business Domain</span>
+      <span class="domain-label">Target Business Domain</span>
       <div class="domain-tags">
         <span>헬스케어</span>
         <span>라이프스타일</span>
