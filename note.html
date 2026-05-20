@@ -1,8 +1,7 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ELTNGHJWH3"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ELTNGHJWH3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -11,35 +10,35 @@
   gtag('config', 'G-ELTNGHJWH3');
 </script>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>YGGDA | Note</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin />
 
   <style>
     .consent-text{
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  flex: 1;
-}
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
 
-.consent-link{
-  align-self: flex-start;
-  border: none;
-  background: transparent;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-  color: var(--text);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  font-weight: 800;
-  font-size: 13px;
-}
-.consent-link:hover{
-  opacity: 0.85;
-}
+    .consent-link{
+      align-self: flex-start;
+      border: none;
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-weight: 800;
+      font-size: 13px;
+    }
+    .consent-link:hover{
+      opacity: 0.85;
+    }
 
     :root {
       --bg: #dbb27c;
@@ -55,14 +54,16 @@
 
     body {
       margin: 0;
-      min-height: 100vh;
+      /* 화면 꽉 차게 방어 (모바일 대응 dvh 적용) */
+      min-height: 100dvh;
       display: grid;
       place-items: center;
       background: var(--bg);
       color: var(--text);
       font-family: "Pretendard Variable", Pretendard, -apple-system, sans-serif;
-      padding: 20px;
+      padding: clamp(10px, 2vh, 20px);
       -webkit-font-smoothing: antialiased;
+      overflow-y: auto; /* 필요시 스크롤 허용하나 최대한 안생기게 방어 */
     }
 
     .card {
@@ -73,26 +74,23 @@
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--card-border);
       border-radius: 24px;
-      padding: 40px 32px;
+      /* 상하 패딩을 화면 높이에 따라 유동적으로 조절하여 짤림 방지 */
+      padding: clamp(24px, 4vh, 40px) clamp(20px, 4vw, 32px);
       box-shadow: 0 8px 32px rgba(31, 59, 46, 0.05);
       opacity: 0;
       transform: translateY(10px);
       animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    @media (max-width: 480px) {
-      .card { padding: 30px 20px; }
-    }
-
     .top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 24px;
+      margin-bottom: clamp(16px, 3vh, 24px); /* 간격 압축 */
     }
 
     h1 {
-      font-size: 22px;
+      font-size: clamp(20px, 4vw, 22px);
       font-weight: 700;
       margin: 0;
       letter-spacing: -0.02em;
@@ -113,10 +111,10 @@
     }
 
     p.guide {
-      margin: 0 0 32px;
+      margin: 0 0 clamp(16px, 3vh, 32px); /* 간격 압축 */
       color: var(--text-muted);
-      font-size: 15px;
-      line-height: 1.6;
+      font-size: clamp(14px, 3vw, 15px);
+      line-height: 1.5;
       word-break: keep-all;
     }
 
@@ -125,14 +123,17 @@
       font-size: 13px;
       font-weight: 600;
       color: var(--text);
-      margin: 0 0 8px 4px;
+      margin: 0 0 6px 4px;
     }
 
-    .field-group { margin-bottom: 24px; }
+    .field-group { 
+      margin-bottom: clamp(12px, 2vh, 24px); /* 그룹 간격 압축 */
+    }
 
     input, textarea {
       width: 100%;
-      padding: 16px;
+      /* 인풋창 높이 압축 */
+      padding: clamp(12px, 2vh, 16px);
       border-radius: 16px;
       border: 1px solid transparent;
       background: var(--input-bg);
@@ -155,12 +156,16 @@
       color: rgba(31, 59, 46, 0.35);
     }
 
-    textarea { min-height: 200px; resize: none; }
+    /* 내용 입력창 높이를 화면 세로폭에 맞춰 자동으로 줄어들게 방어 */
+    textarea { 
+      min-height: clamp(80px, 15vh, 200px); 
+      resize: none; 
+    }
 
     button[type="submit"] {
       width: 100%;
-      padding: 16px;
-      margin-top: 10px;
+      padding: clamp(14px, 2.5vh, 16px); /* 버튼 높이 조절 */
+      margin-top: clamp(6px, 1.5vh, 10px);
       border-radius: 16px;
       border: none;
       background: var(--text);
@@ -189,7 +194,7 @@
 
     .status {
       display: none;
-      margin-top: 16px;
+      margin-top: 12px;
       font-size: 14px;
       font-weight: 500;
       text-align: center;
@@ -202,15 +207,16 @@
     .small {
       font-size: 12px;
       color: var(--text-muted);
-      margin-top: 20px;
+      margin-top: clamp(12px, 2vh, 20px);
       text-align: center;
-      line-height: 1.5;
+      line-height: 1.4;
+      word-break: keep-all;
     }
 
     /* ✅ 전송 완료 화면 */
     .done{
       display: none;
-      margin-top: 22px;
+      margin-top: 16px;
       text-align: center;
       padding: 26px 18px;
       border-radius: 18px;
@@ -219,15 +225,15 @@
     }
 
     .done-icon{
-      width: 56px;
-      height: 56px;
+      width: 50px;
+      height: 50px;
       border-radius: 999px;
       display: grid;
       place-items: center;
       margin: 0 auto 10px;
       background: rgba(31,59,46,0.12);
       color: #614332;
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 900;
     }
 
@@ -241,7 +247,7 @@
     .done-desc{
       font-size: 14px;
       color: rgba(31,59,46,0.7);
-      line-height: 1.6;
+      line-height: 1.5;
     }
 
     .done-actions{
@@ -274,20 +280,20 @@
 
     /* ✅ 개인정보 동의 영역 */
     .consent {
-      margin-top: 14px;
-      padding: 14px 14px;
+      margin-top: 10px;
+      padding: clamp(10px, 1.5vh, 14px);
       border-radius: 16px;
       background: rgba(255,255,255,0.45);
       border: 1px solid rgba(255,255,255,0.65);
     }
     .consent-row{
       display: flex;
-      gap: 10px;
+      gap: 8px;
       align-items: flex-start;
     }
     .consent input[type="checkbox"]{
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
       margin-top: 2px;
       accent-color: #614332;
       box-shadow: none;
@@ -296,7 +302,7 @@
       margin: 0;
       font-size: 13px;
       font-weight: 600;
-      line-height: 1.45;
+      line-height: 1.4;
       cursor: pointer;
     }
     .consent a{
@@ -306,86 +312,17 @@
       font-weight: 700;
     }
     .consent-desc{
-      margin-top: 8px;
+      margin-top: 6px;
       font-size: 12px;
       color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    /* ✅ 모달 */
-    .modal-backdrop{
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.35);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      z-index: 9999;
-    }
-    .modal{
-      width: 100%;
-      max-width: 640px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid rgba(255,255,255,0.8);
-      box-shadow: 0 16px 48px rgba(31,59,46,0.18);
-      overflow: hidden;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-    }
-    .modal-header{
-      padding: 16px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid rgba(31,59,46,0.10);
-    }
-    .modal-title{
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-    .modal-close{
-      border: none;
-      background: rgba(31,59,46,0.08);
-      color: #614332;
-      border-radius: 12px;
-      padding: 10px 12px;
-      cursor: pointer;
-      font-weight: 800;
-    }
-    .modal-body{
-      padding: 16px 18px 18px;
-      color: #614332;
-      font-size: 13px;
-      line-height: 1.7;
-    }
-    .modal-body ul{
-      margin: 8px 0 0 18px;
-      padding: 0;
-    }
-    .modal-body li{
-      margin: 4px 0;
-    }
-    .modal-body .muted{
-      color: rgba(31,59,46,0.72);
-      font-size: 12px;
-      margin-top: 10px;
+      line-height: 1.4;
+      word-break: keep-all;
     }
 
     @keyframes fadeInUp {
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
-
-  <!-- GA4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ELTNGHJWH3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-ELTNGHJWH3');
-  </script>
 </head>
 
 <body>
@@ -413,23 +350,18 @@
         <textarea id="message" name="message" placeholder="자유롭게 작성해 주세요..." required></textarea>
       </div>
 
-      <!-- ✅ 개인정보 수집·이용 동의 (필수) -->
-<div class="consent">
-  <div class="consent-row">
-    <input id="privacyAgree" name="privacyAgree" type="checkbox" required />
-    <label for="privacyAgree">[필수] 개인정보 수집·이용에 동의합니다.</label>
-  </div>
+      <div class="consent">
+        <div class="consent-row">
+          <input id="privacyAgree" name="privacyAgree" type="checkbox" required />
+          <label for="privacyAgree">[필수] 개인정보 수집·이용에 동의합니다.</label>
+        </div>
 
-  <div class="consent-desc">
-    수집 항목: 이름, 연락처(전화/이메일), 메시지, 접속정보(브라우저 정보 등)
-    · 이용 목적: 문의 접수 및 회신
-    · 보관: 목적 달성 후 지체 없이 파기
-  </div>
-
-  <!-- (선택) 상세방침 링크를 다른 곳에 둘 거면 이 줄도 빼도 됩니다 -->
-  <!-- <div class="consent-desc">자세한 내용: <a href="privacy.html">개인정보처리방침</a></div> -->
-</div>
-
+        <div class="consent-desc">
+          수집 항목: 이름, 연락처(전화/이메일), 메시지, 접속정보(브라우저 정보 등)
+          · 이용 목적: 문의 접수 및 회신
+          · 보관: 목적 달성 후 지체 없이 파기
+        </div>
+      </div>
 
       <button type="submit">메시지 보내기</button>
 
@@ -439,7 +371,6 @@
       </div>
     </form>
 
-    <!-- ✅ 전송 완료 화면 -->
     <div class="done" id="done">
       <div class="done-icon">✓</div>
       <div class="done-title">메시지 전송 완료</div>
@@ -452,29 +383,7 @@
     </div>
   </main>
 
-  <!-- ✅ 개인정보 안내 모달 -->
- <!-- div class="modal-backdrop" id="privacyModal" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal">
-      <div class="modal-header">
-        <div class="modal-title">개인정보 수집·이용 안내</div>
-        <button class="modal-close" type="button" id="closePrivacy">닫기</button>
-      </div>
-      <div class="modal-body">
-        <ul>
-          <li><b>수집 항목</b>: 방문자 이름, 연락처(전화/이메일), 메시지, 접속정보(브라우저 정보, 접속 페이지, 작성 시각)</li>
-          <li><b>이용 목적</b>: 메시지 접수 및 회신, 서비스 운영 및 부정 이용 방지</li>
-          <li><b>보관 기간</b>: 목적 달성 후 지체 없이 파기(단, 관계 법령에 따라 보관이 필요한 경우 해당 기간 보관)</li>
-          <li><b>처리 위탁/외부 처리</b>: Google Apps Script(전송 처리), Google Analytics 4(이용 분석)</li>
-          <li><b>동의 거부 권리</b>: 동의를 거부할 수 있으나, 거부 시 메시지 접수가 제한됩니다.</li>
-        </ul>
-        <div class="muted">
-          더 상세한 내용은 별도 개인정보처리방침에서 안내할 수 있습니다.
-        </div>
-      </div>
-    </div>
-  </div>-->
-
- <script>
+  <script>
 (() => {
   const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyz-psdr-MItLu7laOtrfksoPcywT-px9Niuc0qhcjJxZpCFDSKBNpHi-g6fjB5LQ7fuw/exec";
   
@@ -487,7 +396,6 @@
   const sendMoreBtn = document.getElementById("sendMore");
   const privacyAgreeEl = document.getElementById("privacyAgree");
 
-  // ✅ JS가 아예 안 도는/에러 나는 경우 화면에 표시
   function showStatus(msg) {
     if (!statusEl) return;
     statusEl.style.display = "block";
@@ -503,44 +411,10 @@
     return;
   }
 
-  // ✅ 모달(내용보기) 사용 중이면 연결, 없으면 무시
-  const privacyModal = document.getElementById("privacyModal");
-  const openPrivacy = document.getElementById("openPrivacy");
-  const closePrivacy = document.getElementById("closePrivacy");
-
-  function openModal() {
-    if (!privacyModal) return;
-    privacyModal.style.display = "flex";
-    privacyModal.setAttribute("aria-hidden", "false");
-  }
-  function closeModal() {
-    if (!privacyModal) return;
-    privacyModal.style.display = "none";
-    privacyModal.setAttribute("aria-hidden", "true");
-  }
-
-  if (openPrivacy && privacyModal) {
-    openPrivacy.addEventListener("click", (e) => {
-      e.preventDefault?.();
-      openModal();
-    });
-  }
-  if (closePrivacy && privacyModal) closePrivacy.addEventListener("click", closeModal);
-  if (privacyModal) {
-    privacyModal.addEventListener("click", (e) => {
-      if (e.target === privacyModal) closeModal();
-    });
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeModal();
-    });
-  }
-
-  // ✅ 핵심: 기본 제출(리로드) 완전 차단 + 상태 표시
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     e.stopPropagation();
 
-    // 동의 체크(존재할 때만)
     if (privacyAgreeEl && !privacyAgreeEl.checked) {
       showStatus("개인정보 수집·이용 동의가 필요합니다.");
       return;
@@ -590,7 +464,6 @@
 
         form.reset();
 
-        // done 화면이 있으면 전환, 없으면 status만 표시
         if (doneEl) {
           form.style.display = "none";
           doneEl.style.display = "block";
@@ -621,14 +494,6 @@
     });
   }
 })();
-</script>
-  </body>
+  </script>
+</body>
 </html>
-
-
-
-
-
-
-
-
