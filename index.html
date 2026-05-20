@@ -46,10 +46,8 @@
       text-align: center;
       gap: 24px; 
       padding: 40px 20px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       max-width: 600px;
+      /* 애니메이션 제거하여 무조건 화면에 보이도록 수정 */
     }
 
     /* 메인 타이틀 */
@@ -71,7 +69,7 @@
       letter-spacing: 0.05em;
     }
 
-    /* 새로 추가된 소개 영역 스타일 */
+    /* 소개 영역 스타일 */
     .intro-box {
       background: rgba(255, 255, 255, 0.3);
       border: 1px solid rgba(105, 57, 28, 0.15);
@@ -87,10 +85,11 @@
     }
 
     .intro-title {
-      font-weight: 700;
-      margin: 0 0 12px 0;
+      font-weight: 800;
+      margin: 0 0 14px 0;
       color: var(--accent);
       font-size: 16px;
+      word-break: keep-all;
     }
 
     .intro-box ul {
@@ -100,8 +99,28 @@
     }
 
     .intro-box li {
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    
+    .intro-box li strong {
+      font-weight: 700;
+      color: var(--accent);
+      display: inline-block;
+      min-width: 85px; 
+    }
+
+    /* 팀 소개 텍스트 */
+    .intro-desc {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px dashed rgba(105, 57, 28, 0.2);
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      line-height: 1.6;
+      word-break: keep-all;
     }
 
     .intro-highlight {
@@ -112,24 +131,14 @@
       color: var(--accent);
       letter-spacing: 0.02em;
       background: rgba(255, 255, 255, 0.4);
-      padding: 10px;
+      padding: 12px 20px;
       border-radius: 8px;
+      width: 100%;
     }
 
-    /* 서비스 준비중 */
-    .status {
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--text-muted);
-      background: rgba(255, 255, 255, 0.2);
-      padding: 6px 16px;
-      border-radius: 20px;
-      display: inline-block;
-      margin: 0;
-    }
-
+    /* 입장 버튼 */
     .enter {
-      margin-top: 4px;
+      margin-top: 8px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -138,7 +147,7 @@
       font-size: 16px;
       font-weight: 600;
       text-decoration: none;
-      padding: 16px 40px;
+      padding: 16px 48px;
       border-radius: 100px;
       box-shadow: 0 4px 15px rgba(105, 57, 29, 0.2);
       transition: all 0.3s ease;
@@ -148,10 +157,6 @@
       transform: translateY(-2px);
       background-color: #4a2713;
       box-shadow: 0 6px 20px rgba(105, 57, 29, 0.3);
-    }
-
-    @keyframes fadeInUp {
-      to { opacity: 1; transform: translateY(0); }
     }
 
     /* 팝업 스타일 */
@@ -172,13 +177,18 @@
     </div>
 
     <div class="intro-box">
+      <div class="intro-title">기획·디자인·개발의 경계를 잇는 End-to-End 디렉팅</div>
       <ul>
-        <li>디자이너의 의도를 해치지 않으면서 (디자인 전공)</li>
-        <li>사용자와 비즈니스 관점을 설계하고 (UX/ISP 컨설팅)</li>
-        <li>구현 가능성까지 판단할 수 있는 (IT 실무 경험)</li>
+        <li><strong>Strategy</strong> 비즈니스 목표와 사용자 경험을 결합한 전략 수립</li>
+        <li><strong>Design</strong> 기획의 본질을 훼손하지 않는 직관적인 시각 설계</li>
+        <li><strong>Technology</strong> 기술적 타당성을 바탕으로 한 실현 가능한 구현</li>
       </ul>
-      <p class="intro-highlight">풀스택 디렉터(Full-stack Director)</p>
+      <div class="intro-desc">
+        단일 디렉터가 프로젝트 전 과정을 총괄하여 일관성 있는 퀄리티를 보장하며, 프로젝트 특성에 맞춰 검증된 시니어 파트너들과 애자일(Agile)하게 협업합니다.
+      </div>
     </div>
+    
+    <div class="intro-highlight">풀스택 디렉터(Full-stack Director)</div>
 
     <a class="enter" href="note.html"
        onclick="gtag('event','enter_click',{page_title:document.title});">
@@ -192,39 +202,43 @@
 
   <script>
     (function() {
-      // 로컬 스토리지를 이용한 방문 횟수 카운팅
-      let yggdaVisit = localStorage.getItem('yggda_real_visit') || 0;
-      yggdaVisit = parseInt(yggdaVisit) + 1;
-      localStorage.setItem('yggda_real_visit', yggdaVisit);
+      try {
+        // 로컬 스토리지를 이용한 방문 횟수 카운팅
+        let yggdaVisit = localStorage.getItem('yggda_real_visit') || 0;
+        yggdaVisit = parseInt(yggdaVisit) + 1;
+        localStorage.setItem('yggda_real_visit', yggdaVisit);
 
-      // 랜덤 방문자 수 생성 (예시: 48명 ~ 59명)
-      const totalCount = Math.floor(Math.random() * (59 - 48 + 1)) + 48;
-      
-      const popup = document.getElementById('yggda-popup');
-      const msg = document.getElementById('yggda-message');
+        // 랜덤 방문자 수 생성 (예시: 48명 ~ 59명)
+        const totalCount = Math.floor(Math.random() * (59 - 48 + 1)) + 48;
+        
+        const popup = document.getElementById('yggda-popup');
+        const msg = document.getElementById('yggda-message');
 
-      // 방문 횟수에 따른 메시지 분기 처리
-      if (yggdaVisit === 1) {
-        msg.innerHTML = `🌱 반갑습니다! 오늘 <span style="color:#dab27d; background:#69391c; padding:2px 8px; border-radius:10px; margin:0 4px; color:#fff;">${totalCount}번째</span> 주인공이 되셨네요.`;
-      } else {
-        msg.innerHTML = `✨ <span style="color:#dab27d; background:#69391c; padding:2px 8px; border-radius:10px; margin:0 4px; color:#fff;">${yggdaVisit}회차</span> 재방문! 오늘 ${totalCount}명이 YGGDA와 함께하고 있습니다.`;
+        // 방문 횟수에 따른 메시지 분기 처리
+        if (yggdaVisit === 1) {
+          msg.innerHTML = `🌱 반갑습니다! 오늘 <span style="color:#dab27d; background:#69391c; padding:2px 8px; border-radius:10px; margin:0 4px; color:#fff;">${totalCount}번째</span> 주인공이 되셨네요.`;
+        } else {
+          msg.innerHTML = `✨ <span style="color:#dab27d; background:#69391c; padding:2px 8px; border-radius:10px; margin:0 4px; color:#fff;">${yggdaVisit}회차</span> 재방문! 오늘 ${totalCount}명이 YGGDA와 함께하고 있습니다.`;
+        }
+
+        // 팝업 애니메이션 띄우기
+        setTimeout(() => {
+          popup.style.display = 'block';
+          popup.animate([
+            { transform: 'translate(-50%, -20px)', opacity: 0 },
+            { transform: 'translate(-50%, 0)', opacity: 1 }
+          ], { duration: 600, easing: 'ease-out', fill: 'forwards' });
+        }, 1000);
+
+        // 일정 시간(5초) 후 팝업 숨기기
+        setTimeout(() => {
+          popup.style.opacity = '0';
+          popup.style.transition = 'opacity 0.5s ease';
+          setTimeout(() => { popup.style.display = 'none'; }, 500);
+        }, 5000); 
+      } catch (error) {
+        console.warn("로컬 스토리지 접근이 차단된 환경입니다. 기본 화면만 표시됩니다.");
       }
-
-      // 팝업 애니메이션 띄우기
-      setTimeout(() => {
-        popup.style.display = 'block';
-        popup.animate([
-          { transform: 'translate(-50%, -20px)', opacity: 0 },
-          { transform: 'translate(-50%, 0)', opacity: 1 }
-        ], { duration: 600, easing: 'ease-out', fill: 'forwards' });
-      }, 1000);
-
-      // 일정 시간(5초) 후 팝업 숨기기
-      setTimeout(() => {
-        popup.style.opacity = '0';
-        popup.style.transition = 'opacity 0.5s ease';
-        setTimeout(() => { popup.style.display = 'none'; }, 500);
-      }, 5000); 
     })();
   </script>
 </body>
