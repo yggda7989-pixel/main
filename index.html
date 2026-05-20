@@ -47,7 +47,6 @@
       gap: 24px; 
       padding: 40px 20px;
       max-width: 600px;
-      /* 애니메이션 제거하여 무조건 화면에 보이도록 수정 */
     }
 
     /* 메인 타이틀 */
@@ -136,9 +135,44 @@
       width: 100%;
     }
 
+    /* 사업 분야 (추가된 영역) */
+    .domain-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: -4px;
+    }
+    
+    .domain-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .domain-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .domain-tags span {
+      background: rgba(255, 255, 255, 0.4);
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(105, 57, 28, 0.15);
+      box-shadow: 0 2px 6px rgba(105, 57, 29, 0.03);
+    }
+
     /* 입장 버튼 */
     .enter {
-      margin-top: 8px;
+      margin-top: 12px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -189,6 +223,16 @@
     </div>
     
     <div class="intro-highlight">풀스택 디렉터(Full-stack Director)</div>
+
+    <div class="domain-area">
+      <span class="domain-label">Business Domain</span>
+      <div class="domain-tags">
+        <span>헬스케어</span>
+        <span>라이프스타일</span>
+        <span>핀테크</span>
+        <span>커머스</span>
+      </div>
+    </div>
 
     <a class="enter" href="note.html"
        onclick="gtag('event','enter_click',{page_title:document.title});">
